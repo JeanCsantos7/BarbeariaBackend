@@ -15,8 +15,8 @@ const options = {
         url: "https://barbearia-backend-six.vercel.app", 
       },
     ],
-    //
-    api: ["./routes/*.ts"], 
+
+    apis: ["./routes/*.ts"], 
   };
   
   const swaggerDefinition = swaggerJSDoc(options);
