@@ -33,8 +33,10 @@ const Routes = Router();
  *     responses:
  *       200:
  *         description: Cliente cadastrado com sucesso
- *       500:
+ *       400:
  *         description: Erro na validação ou dados faltando
+ *       500:
+ *         description: Erro no servidor
  */
 Routes.post("/registrarClientes", contasClientes.createClientes);
 
@@ -59,8 +61,10 @@ Routes.post("/registrarClientes", contasClientes.createClientes);
  *     responses:
  *       200:
  *         description: Cliente Logado com sucesso
+ *       400:
+ *         description: Email ou senha incorretos
  *       500:
- *         description: Email ou senha incorretos / token inválido
+ *         description: Erro no servidor
  */
 Routes.post("/loginClientes", contasClientes.loginClientes);
 
@@ -69,7 +73,7 @@ Routes.post("/loginClientes", contasClientes.loginClientes);
  * /admin/barbeiros:
  *   post:
  *     summary: Login de um barbeiro com perfil admin.
- *     tags: [Clientes]
+ *     tags: [Admin]
  *     requestBody:
  *       required: true
  *       content:
@@ -85,8 +89,10 @@ Routes.post("/loginClientes", contasClientes.loginClientes);
  *     responses:
  *       200:
  *         description: Barbeiro logado com sucesso
+ *       400:
+ *         description: Email ou senha incorretos
  *       500:
- *         description: Email ou senha incorretos / token inválido
+ *         description: Erro no servidor
  */
 Routes.post("/admin/barbeiros", contasClientes.loginBarbeiros);
 
@@ -95,7 +101,7 @@ Routes.post("/admin/barbeiros", contasClientes.loginBarbeiros);
  * /registrarHorarios:
  *   post:
  *     summary: Criação de horários disponíveis por barbeiros.
- *     tags: [Clientes]
+ *     tags: [Horarios]
  *     requestBody:
  *       required: true
  *       content:
@@ -117,8 +123,10 @@ Routes.post("/admin/barbeiros", contasClientes.loginBarbeiros);
  *     responses:
  *       200:
  *         description: Data e horário cadastrados com sucesso
- *       500:
+ *       400:
  *         description: Erro de dados ou dados inválidos
+ *       500:
+ *         description: Erro no servidor
  */
 Routes.post("/registrarHorarios", AgendaHorarios.criacaoHorarios);
 
@@ -127,7 +135,7 @@ Routes.post("/registrarHorarios", AgendaHorarios.criacaoHorarios);
  * /agendamentoRealizado:
  *   post:
  *     summary: Cliente realiza agendamento com barbeiro.
- *     tags: [Clientes]
+ *     tags: [Horarios]
  *     requestBody:
  *       required: true
  *       content:
@@ -149,8 +157,10 @@ Routes.post("/registrarHorarios", AgendaHorarios.criacaoHorarios);
  *     responses:
  *       200:
  *         description: Agendamento realizado com sucesso
- *       500:
+ *       400:
  *         description: Erro de dados ou dados inválidos
+ *       500:
+ *         description: Erro no servidor
  */
 Routes.post("/agendamentoRealizado", AgendaHorarios.agendamentoRealizado);
 
@@ -159,7 +169,7 @@ Routes.post("/agendamentoRealizado", AgendaHorarios.agendamentoRealizado);
  * /agendamentoBarbeiro/{barbeiro}:
  *   get:
  *     summary: Lista horários agendados de um barbeiro específico.
- *     tags: [Clientes]
+ *     tags: [Horarios]
  *     parameters:
  *       - in: path
  *         name: barbeiro
@@ -167,11 +177,14 @@ Routes.post("/agendamentoRealizado", AgendaHorarios.agendamentoRealizado);
  *         schema:
  *           type: string
  *         description: Nome do barbeiro
+ *         example: "Joao"
  *     responses:
  *       200:
  *         description: Sucesso ao consultar horários
- *       500:
+ *       400:
  *         description: Erro na consulta
+ *       500:
+ *         description: Erro no servidor
  */
 Routes.get("/agendamentoBarbeiro/:barbeiro", AgendaHorarios.agendamentoBarbeiros);
 
@@ -184,8 +197,10 @@ Routes.get("/agendamentoBarbeiro/:barbeiro", AgendaHorarios.agendamentoBarbeiros
  *     responses:
  *       200:
  *         description: Lista retornada com sucesso
- *       500:
+ *       400:
  *         description: Erro ao buscar clientes
+ *       500:
+ *         description: Erro no servidor
  */
 Routes.get("/Clientes", contasClientes.findClientes);
 
@@ -202,11 +217,14 @@ Routes.get("/Clientes", contasClientes.findClientes);
  *         schema:
  *           type: string
  *         description: Nome do cliente
+ *         example: "Carlos"
  *     responses:
  *       200:
  *         description: Sucesso ao consultar horários
- *       500:
+ *       400:
  *         description: Erro na consulta
+ *       500:
+ *         description: Erro no servidor
  */
 Routes.get("/horariosClientes/:nome", contasClientes.procurarHorarios);
 
@@ -215,7 +233,7 @@ Routes.get("/horariosClientes/:nome", contasClientes.procurarHorarios);
  * /listaHorarios/{barbeiro}:
  *   get:
  *     summary: Lista horários disponíveis de um barbeiro.
- *     tags: [Clientes]
+ *     tags: [Horarios]
  *     parameters:
  *       - in: path
  *         name: barbeiro
@@ -223,11 +241,14 @@ Routes.get("/horariosClientes/:nome", contasClientes.procurarHorarios);
  *         schema:
  *           type: string
  *         description: Nome do barbeiro
+ *         example: "Joao"
  *     responses:
  *       200:
  *         description: Sucesso ao consultar horários
- *       500:
+ *       400:
  *         description: Erro na consulta
+ *       500:
+ *         description: Erro no servidor
  */
 Routes.get("/listaHorarios/:barbeiro", AgendaHorarios.horariosDisponiveis);
 
@@ -236,7 +257,7 @@ Routes.get("/listaHorarios/:barbeiro", AgendaHorarios.horariosDisponiveis);
  * /editarHorarios/{id}:
  *   put:
  *     summary: Edita data/horário a partir do ID.
- *     tags: [Clientes]
+ *     tags: [Horarios]
  *     parameters:
  *       - in: path
  *         name: id
@@ -259,8 +280,10 @@ Routes.get("/listaHorarios/:barbeiro", AgendaHorarios.horariosDisponiveis);
  *     responses:
  *       200:
  *         description: Horário atualizado com sucesso
- *       500:
+ *       400:
  *         description: Erro na atualização
+ *       500:
+ *         description: Erro no servidor
  */
 Routes.put("/editarHorarios/:id", AgendaHorarios.editarHorarios);
 
@@ -269,7 +292,7 @@ Routes.put("/editarHorarios/:id", AgendaHorarios.editarHorarios);
  * /deletarHorarios/{id}:
  *   delete:
  *     summary: Deleta horário pelo ID.
- *     tags: [Clientes]
+ *     tags: [Horarios]
  *     parameters:
  *       - in: path
  *         name: id
@@ -279,8 +302,10 @@ Routes.put("/editarHorarios/:id", AgendaHorarios.editarHorarios);
  *     responses:
  *       200:
  *         description: Horário deletado com sucesso
- *       500:
+ *       400:
  *         description: Erro ao deletar horário
+ *       500:
+ *         description: Erro no servidor
  */
 Routes.delete("/deletarHorarios/:id", AgendaHorarios.deletarHorarios);
 
