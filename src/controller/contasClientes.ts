@@ -7,7 +7,7 @@ class contasClientesController {
     try {
       const reqParam = req.body;
       const createModel = await contasClientes.createClientes(reqParam);
-      res.json(createModel);
+      res.status(200).json(createModel);
     } catch (error) {
       res.status(500).json({ error: "Erro ao criar conta" });
     }
@@ -16,7 +16,7 @@ class contasClientesController {
   async findClientes(req: Request, res: Response) {
     try {
       const reqParam = await contasClientes.findClientes();
-      res.json(reqParam);
+      res.status(200).json(reqParam);
     } catch (error) {
       console.error("Erro ao buscar clientes:", error);  
       res.status(500).json({ error: "Erro ao buscar clientes" });
