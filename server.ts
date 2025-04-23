@@ -14,27 +14,7 @@ app.get("/swagger.json", (req, res) => {
 });
 
 
-app.get("/api-docs", (req, res) => {
-  res.send(`
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <title>Documentação da API</title>
-        <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist/swagger-ui.css" />
-      </head>
-      <body>
-        <div id="swagger-ui"></div>
-        <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-bundle.js"></script>
-        <script>
-          SwaggerUIBundle({
-            url: "/swagger.json",
-            dom_id: "#swagger-ui"
-          });
-        </script>
-      </body>
-    </html>
-  `);
-});
+
 
 app.listen(PORT, () => {
   console.log(`🟢 Servidor rodando em: ${isProd ? 'https://barbearia-backend-six.vercel.app' : `http://localhost:${PORT}`}`);
